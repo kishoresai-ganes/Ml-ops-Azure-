@@ -1,6 +1,6 @@
 FROM continuumio/miniconda3 AS build
 WORKDIR /app
-
+#ENV PATH /home/anaconda3/bin:$PATH
 # Create the environment:
 COPY environment.yml .
 RUN conda env create -f environment.yml
@@ -26,9 +26,8 @@ FROM debian:buster AS runtime
 
 # Copy /venv from the previous stage:
 COPY --from=build /venv /venv
-
 # Make RUN commands use the new environment:
-SHELL ["conda", "run", "-n", "venv", "/bin/bash", "-c"]
+SHELL ["/bin/bash", "-c"]
 
 # Activate the environment, and make sure it's activated:
 #RUN echo "conda activate myenv" > ~/.bashrc
@@ -37,4 +36,5 @@ SHELL ["conda", "run", "-n", "venv", "/bin/bash", "-c"]
 
 # The code to run when container is started:
 COPY hello.py .
-ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "venv", "python", "hello.py"]
+ENTRYPOINT source venv/bin/activate && \
+         python3 hello.py

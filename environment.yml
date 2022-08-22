@@ -1,10 +1,9 @@
 name: myenv
 channels:
-  - conda-forge
+  - defaults
 dependencies:
   - azure=1.0.2=py36_1
   - azure-storage-blob
   - python=3.6
   - flask
-  - numpy
 prefix: /home/kishoresaivm/anaconda3/envs/myenv

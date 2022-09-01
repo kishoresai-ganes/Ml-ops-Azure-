@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>California House Price Prediction</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+<!--===============================================================================================-->
+
+<style>
+.contact100-form-title {
+  font-family:'Caveat', cursive;
+  background-color: lightgrey;
+  color: white;
+}
+
+a:link {
+  color: magenta;
+}
+
+a:visited {
+  color: blue;
+}
+
+a:hover {
+  color: blue;
+}
+
+a:active {
+  color: blue;
+}
+
+input::-webkit-input-placeholder {
+    font-size: 16px;
+}
+
+.input100 {
+    display: block;
+    width: 100%;
+    background: transparent;
+    font-family: Montserrat-Regular;
+    font-size: 15px;
+    color: #333333;
+    line-height: 1.2;
+    padding: 0 25px 0 60px;
+  }
+.container-contact100-form-btn {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 17px;
+	border: #333333;
+	border-radius: 15%;
+	box-shadow: inset;
+	box-shadow: #333333;
+	
+  }
+  .wrap-input100 {
+    width: 100%;
+    position: relative;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px;
+    margin-bottom: 15px
+  }
+  
+  .label-input100 {
+    font-size: 18px;
+    color: #999999;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 60px;
+    height: 100%;
+    top: 0;
+    left: 2px;
+  }
+  
+  .label-input100.rs1 {
+    height: 60px;
+  }
+  
+  .input100 {
+    display: block;
+    width: 100%;
+    background: transparent;
+    font-family: Montserrat-Regular;
+    font-size: 15px;
+    color: #333333;
+    line-height: 1.2;
+    padding: 0 25px 0 60px;
+  }
+  
+  input.input100 {
+    height: 55px;
+  }
+  
+  textarea.input100 {
+    min-height: 162px;
+    padding-top: 22px;
+    padding-bottom: 15px;
+  }
+  
+
+</style>
+</head>
+<body>
+
+			<form action="{{ url_for('predict')}}" method="post" class="contact100-form validate-form">
+				
+				<!--1-->
+				<div class="wrap-input100 validate-input">
+					<input id="longitude" class="input100" type="number" step="any"  name="longitude" title="A measure of how far west a house is; a higher value is farther west" required="required" placeholder="Longitude Ex : -124, -120, -114, etc"/>
+					<span class="focus-input100"></span>
+					<label class="label-input100 rs1" for="message">
+						<span class="lnr lnr-bubble"></span>
+					</label>
+				</div>
+				
+				<!--2-->
+				<div class="wrap-input100 validate-input">
+					<input id="latitude" class="input100" type="number" min="0" step="any" name="latitude" title="A measure of how far north a house is; a higher value is farther north" required="required" placeholder="Latitude Ex : 32,33,24, etc"/>
+					<span class="focus-input100"></span>
+					<label class="label-input100 rs1" for="message">
+						<span class="lnr lnr-bubble"></span>
+					</label>
+				</div>
+				
+				<!--3-->
+				<div class="wrap-input100 validate-input">
+					<input id="housing_median_age" class="input100" type="number" step="any" min="0" title="Median age of a house within a block; a lower number is a newer building" required="required" name="housing_median_age" placeholder="Median age of a house within a block"/>
+					<span class="focus-input100"></span>
+					<label class="label-input100 rs1" for="message">
+						<span class="lnr lnr-bubble"></span>
+					</label>
+				</div>
+				
+				<!--4-->
+				<div class="wrap-input100 validate-input">
+					<input id="total_rooms" class="input100" step="any" type="number" min="0" name="total_rooms" title="Total number of rooms within a block" required="required" placeholder="# of rooms within a block"/>
+					<span class="focus-input100"></span>
+					<label class="label-input100 rs1" for="message">
+						<span class="lnr lnr-bubble"></span>
+					</label>
+				</div>
+				
+				<!--5-->
+				<div class="wrap-input100 validate-input">
+					<input id="total_bedrooms" class="input100" type="number" min="0" step="any" name="total_bedrooms" title="Total number of bedrooms within a block" required="required" placeholder="# of bedrooms within a block"/>
+					<span class="focus-input100"></span>
+					<label class="label-input100 rs1" for="message">
+						<span class="lnr lnr-bubble"></span>
+					</label>
+				</div>
+				
+				<!--6-->
+				<div class="wrap-input100 validate-input">	
+					<input id="population" class="input100" type="number" min="0" step="any" title="Total number of people residing within a block" required="required" name="population" placeholder="# of people residing within a block"/>
+					<span class="focus-input100"></span>
+					<label class="label-input100 rs1" for="message">
+						<span class="lnr lnr-bubble"></span>
+					</label>
+				</div>
+				
+				<!--7-->
+				<div class="wrap-input100 validate-input">	
+					<input id="households" class="input100" type="number" min="0" step="any"  name="households"  title="Total number of households, a group of people residing within a home unit, for a block" required="required" placeholder="# of people residing within a home unit, for a block"/>
+					<span class="focus-input100"></span>
+					<label class="label-input100 rs1" for="message">
+						<span class="lnr lnr-bubble"></span>
+					</label>
+				</div>
+			
+				<!--8-->
+				<div class="wrap-input100 validate-input">
+					<input id="median_income" class="input100" type="number" min="0" step="any"  name="median_income" title="Median income for households within a block of houses (measured in tens of thousands of US Dollars)" required="required" placeholder="Median income for households within a block of houses"/>
+					<span class="focus-input100"></span>
+					<label class="label-input100 rs1" for="message">
+						<span class="lnr lnr-bubble"></span>
+					</label>
+				</div>
+				
+				<!--9-->
+				<div class="wrap-input100 validate-input">
+					<label class="label-input100" for="name">
+						<span class="lnr lnr-user m-b-2"></span>
+					</label>
+					<select id="ocean_proximity" class="input100" required="required" name="ocean_proximity"/>
+								<option value="" disabled selected hidden>Select Location of the house w.r.t Ocean/Sea</option>
+								<option value="0">Inland</option>
+								<option value="1">Not near Ocean</option>
+								<option value="2">Near Ocean</option>
+								<option value="3">Near Bay</option>
+								<option value="4">Island</option>
+					</select>
+							
+				</div>
+
+				<div class="container-contact100-form-btn">
+					<button class="contact100-form-btn">
+						Predict
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-23581568-13');
+	</script>
+</body>
+</html>
